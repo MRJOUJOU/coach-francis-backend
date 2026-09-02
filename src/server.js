@@ -20,11 +20,15 @@ async function main() {
   const app = createApp()
   const httpServer = http.createServer(app)
 
-  const io = initSockets(httpServer, process.env.CLIENT_ORIGIN || 'http://localhost:5173')
+  const io = initSockets(
+    httpServer,
+    process.env.CLIENT_ORIGIN || 'http://localhost:5173'
+  )
+
   app.set('io', io)
 
-  httpServer.listen(PORT, () => {
-    console.log(`✓ API démarrée sur http://localhost:${PORT}`)
+  httpServer.listen(PORT, '0.0.0.0', () => {
+    console.log(`✓ API démarrée sur le port ${PORT}`)
   })
 
   startScheduledJobs()
