@@ -17,7 +17,7 @@ function setRefreshCookie(res, token) {
     secure: isProd,
     sameSite: isProd ? 'none' : 'lax',
     maxAge: 30 * 24 * 60 * 60 * 1000,
-    path: '/auth',
+    path: '/',
   })
 }
 
@@ -75,7 +75,7 @@ export const refresh = asyncHandler(async (req, res) => {
 })
 
 export const logout = asyncHandler(async (req, res) => {
-  res.clearCookie(REFRESH_COOKIE, { path: '/auth' })
+ res.clearCookie(REFRESH_COOKIE, { path: '/' })
   res.status(204).send()
 })
 
