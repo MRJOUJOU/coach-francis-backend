@@ -429,26 +429,20 @@ async function sendInvitationEmail({
   ].join('\n')
 
   const response = await fetch(SENDLIB_API_URL, {
-    method: 'POST',
-
-    headers: {
-      Authorization: `Bearer ${SENDLIB_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-
-    body: JSON.stringify({
-      from: `"${FROM_NAME}" <${FROM_EMAIL}>`,
-
-      to: email,
-
-      subject:
-        'Votre accès à votre espace FitSphere Plus',
-
-      html,
-
-      text,
-    }),
-  })
+  method: 'POST',
+  headers: {
+    Authorization: `Bearer ${SENDLIB_API_KEY}`,
+    'Content-Type': 'application/json',
+    Origin: CLIENT_ORIGIN,
+  },
+  body: JSON.stringify({
+    from: `"${FROM_NAME}" <${FROM_EMAIL}>`,
+    to: email,
+    subject: 'Votre accès à votre espace FitSphere Plus',
+    html,
+    text,
+  }),
+})
 
   const responseText = await response.text()
 
